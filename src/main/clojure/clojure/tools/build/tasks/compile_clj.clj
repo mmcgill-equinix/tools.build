@@ -64,9 +64,9 @@
                       (parse/deps-from-ns-decl decl))))
                 (dependency/graph)
                 ns-decls)]
-    (->> graph
+    (-> graph
       dependency/topo-sort
-      (filter ns-candidates) ;; only keep stuff in these dirs
+      (->> (filter ns-candidates)) ;; only keep stuff in these dirs
       (concat ns-candidates) ;; but make sure everything is in there at least once
       distinct)))
 
